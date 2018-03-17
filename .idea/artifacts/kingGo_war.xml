@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="kingGo:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="com.go.war">
+      <element id="artifact" artifact-name="kingGo:war exploded" />
+    </root>
+  </artifact>
+</component>
