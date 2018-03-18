@@ -36,6 +36,54 @@
         <property name="checkoutTimeout" value="${connection_pools.checkout_timeout}"/>
     </bean>
 
+
+    <!-- ###########Spring与Hibernate整合  start########### -->
+    <!-- 方式（1）直接加载hibernate.cfg.xml文件的方式整合
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+        <property name="configLocation" value="classpath:hibernate.cfg.xml"></property>
+    </bean>    -->
+
+    <!-- 方式（2）连接池交给spring管理  【一部分配置写到hibernate中，一份分在spring中完成】
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+        <property name="configLocation" value="classpath:hibernate.cfg.xml"></property>
+        <property name="dataSource" ref="dataSource"></property>
+    </bean> -->
+
+
+    <!--所有的配置全部都在Spring配置文件中完成 -->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+        <!-- 注入连接池对象 -->
+        <property name="dataSource" ref="dataSource"></property>
+
+        <!-- hibernate常用配置 -->
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <prop key="hibernate.show_sql">false</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+            </props>
+        </property>
+
+        <!-- hibernate映射配置
+        <property name="mappingLocations">
+            <list>
+                <value>classpath:cn/itcast/entity/*.hbm.xml</value>
+            </list>
+        </property>
+        -->
+        <!--加载实体-->
+        <property name="mappingDirectoryLocations">
+                <list>
+                    <value>classpath:/com</value>
+                </list>
+        </property>
+    </bean>
+
+    <!-- ###########Spring与Hibernate整合  end########### -->
+
+
+
+
     <!-- 配置事务开始 -->
     <bean id="proxyDataSource"
           class="org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy">
