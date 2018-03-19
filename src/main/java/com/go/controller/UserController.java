@@ -1,5 +1,6 @@
 package com.go.controller;
 
+import com.go.util.sysUtil.JsonMessage;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -48,6 +49,7 @@ public class UserController {
     }
 
 
+    //返回json数据测试
     @RequestMapping(value = "json" ,method = RequestMethod.GET)
     @ResponseBody
     public Object json(){
@@ -55,6 +57,6 @@ public class UserController {
         map.put("eriz","123");
         map.put("jock","45");
         map.put("marry","789");
-        return map;
+        return JsonMessage.success(map);
     }
 }

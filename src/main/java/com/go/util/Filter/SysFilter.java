@@ -1,6 +1,7 @@
 package com.go.util.Filter;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +13,9 @@ import java.util.Enumeration;
  */
 public class SysFilter implements Filter {
 
+    private Logger log = Logger.getLogger(getClass().getName());
+
+
     FilterConfig filterConfig;
 
     @Override
@@ -21,7 +25,7 @@ public class SysFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        System.out.println("---------------filter-------------");
+        log.info("start filter.");
         HttpServletRequest hrequest = (HttpServletRequest) request;
         /*Enumeration<String> enumeration = filterConfig.getInitParameterNames();
         while (enumeration.hasMoreElements()){
@@ -46,7 +50,7 @@ public class SysFilter implements Filter {
         // 获取请求的参数
         @SuppressWarnings("unchecked")
         Enumeration<String> allParameter = request.getParameterNames();
-        System.out.println(allParameter);
+//        System.out.println(allParameter);
         while (allParameter.hasMoreElements()) {
             //参数名
             parameterName = allParameter.nextElement();
