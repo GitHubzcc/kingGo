@@ -12,7 +12,7 @@ import java.lang.reflect.Method;
 import java.util.*;
 
 /**
- * Created by study on 9/2/2015.
+ * Created by eriz on 9/2/2015.
  */
 public final class JsonMessage implements Serializable {
     /**
