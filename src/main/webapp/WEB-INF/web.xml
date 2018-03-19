@@ -31,7 +31,7 @@
         <filter-class>com.go.util.Filter.SysFilter</filter-class>
         <init-param>
             <!--对登录页面不进行过滤 -->
-            <param-name>logonStrings</param-name>
+            <param-name>login</param-name>
             <param-value>/page/login.jsp</param-value>
         </init-param>
     </filter>

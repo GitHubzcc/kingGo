@@ -12,15 +12,25 @@ import java.util.Enumeration;
  */
 public class SysFilter implements Filter {
 
+    FilterConfig filterConfig;
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-
+        this.filterConfig = filterConfig;
     }
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         System.out.println("---------------filter-------------");
         HttpServletRequest hrequest = (HttpServletRequest) request;
+        /*Enumeration<String> enumeration = filterConfig.getInitParameterNames();
+        while (enumeration.hasMoreElements()){
+            System.out.println(enumeration.nextElement().toString()+"-----enumeration-----------");
+            if(!enumeration.nextElement().equals("login")){
+
+            }
+        }*/
+
         String user = (String) hrequest.getSession().getAttribute("username");
         //判断用户是否登录
         if (user == null) {
@@ -28,6 +38,7 @@ public class SysFilter implements Filter {
             requestDispatcher.forward(request, response);
             return;
         }
+
 
         //登录了进行url判断参数、参数名称是否含有非法字符
         String parameterName = null;
