@@ -17,8 +17,16 @@ public class UserController {
 
     //    @Resource(name = "userServiceImpl")
 //    private UserService userService;
-//    private Logger log = Logger.getLogger(UserController.class);
-    protected Logger log = Logger.getLogger(getClass().getName());
+    private Logger log = Logger.getLogger(getClass().getName());
+
+
+    @RequestMapping(value = "login", method = RequestMethod.GET)
+    public String login(HttpServletRequest request) {
+        log.info("===========测试filter , 开始缓存session=================");
+        HttpSession httpSession = request.getSession();
+        httpSession.setAttribute("username", "eriz");
+        return "welcome";
+    }
 
 
     @RequestMapping(value = "index", method = RequestMethod.GET)
@@ -26,12 +34,15 @@ public class UserController {
 //        request.setAttribute("key", "key");
 
         HttpSession session = request.getSession();
-        session.setAttribute("key1","key1");
+        session.setAttribute("key1", "key1");
         log.warn("测试logger日志打印结果.........");
         log.debug("===========debug信息===============");
         log.info("===========info信息===============");
         log.error("===========error信息===============");
 //        userService.getName();
-        return "index";
+        return "login";
     }
+
+
+//    @RequestMapping(value = "json")
 }

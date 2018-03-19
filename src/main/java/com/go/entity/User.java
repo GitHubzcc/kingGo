@@ -15,6 +15,12 @@ public class User {
     private String name;
     private String passward;
 
+
+    public User(String name, String passward) {
+        this.name = name;
+        this.passward = passward;
+    }
+
     public String getName() {
         return name;
     }
@@ -29,5 +35,13 @@ public class User {
 
     public void setPassward(String passward) {
         this.passward = passward;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                ", passward='" + passward + '\'' +
+                '}';
     }
 }

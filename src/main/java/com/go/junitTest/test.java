@@ -1,4 +1,4 @@
-package com.go.test;
+package com.go.junitTest;
 
 import org.junit.Test;
 
