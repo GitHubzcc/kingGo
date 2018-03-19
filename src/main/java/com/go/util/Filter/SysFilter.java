@@ -31,13 +31,13 @@ public class SysFilter implements Filter {
             }
         }*/
 
-        String user = (String) hrequest.getSession().getAttribute("username");
+        /*String user = (String) hrequest.getSession().getAttribute("username");
         //判断用户是否登录
         if (user == null) {
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/page/login.jsp");
             requestDispatcher.forward(request, response);
             return;
-        }
+        }*/
 
 
         //登录了进行url判断参数、参数名称是否含有非法字符
