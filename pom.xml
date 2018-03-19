@@ -20,48 +20,57 @@
         <!--<log4jVersion>1.2.17</log4jVersion>-->
         <!--<fileuploadVersion>1.3.1</fileuploadVersion>-->
         <!--<lombokVersion>1.16.10</lombokVersion>-->
-        <!--<fastjson>1.2.36</fastjson>-->
     </properties>
 
     <dependencies>
 
+        <!--jsp 标签start-->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
-
         <dependency>
             <groupId>taglibs</groupId>
             <artifactId>standard</artifactId>
             <version>1.1.2</version>
         </dependency>
-
+        <!--jsp 标签end-->
+        <!--jackson core start-->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>2.8.5</version>
         </dependency>
-
         <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate</artifactId>
-            <version>3.6.10</version>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>2.9.2</version>
         </dependency>
-
-        <!-- fastjson -->
+        <!--jackson core end-->
+        <!-- fastjson start-->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
             <version>1.1.37</version>
         </dependency>
 
+        <!--fastjson end-->
+
+        <!--hibernate start-->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate</artifactId>
+            <version>3.6.10</version>
+        </dependency>
+        <!--hibernate end-->
+        <!--java bean工具包start-->
         <dependency>
             <groupId>commons-beanutils</groupId>
             <artifactId>commons-beanutils</artifactId>
             <version>1.8.3</version>
         </dependency>
-
+        <!--java bean工具包end-->
         <!--spring start-->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -171,26 +180,27 @@
         </dependency>
         <!-- Hibernate Component END -->
 
+        <!--数据库连接池c3p0 start-->
         <dependency>
             <groupId>com.mchange</groupId>
             <artifactId>c3p0</artifactId>
             <version>0.9.5.2</version>
         </dependency>
+        <!--数据库连接池c3p0 end-->
 
+        <!--系统日志start-->
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>1.2.16</version>
         </dependency>
+        <!--系统日志end-->
+
+        
         <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
             <version>2.6</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-annotations</artifactId>
-            <version>2.9.2</version>
         </dependency>
         <dependency>
             <groupId>javax</groupId>
@@ -198,7 +208,6 @@
             <version>7.0</version>
         </dependency>
     </dependencies>
-    <!--druid end-->
 
 
     <build>
