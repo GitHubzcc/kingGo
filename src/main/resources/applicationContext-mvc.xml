@@ -24,7 +24,7 @@
             <!--拦截的路径**表示所有-->
             <mvc:mapping path="/**"/>
             <!--不进行拦截-->
-            <mvc:exclude-mapping path="/test.jsp"/>
+            <mvc:exclude-mapping path="/index.jsp"/>
             <bean class="com.go.util.interceptor.SysInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
