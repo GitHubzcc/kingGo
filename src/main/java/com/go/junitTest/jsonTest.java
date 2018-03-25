@@ -19,7 +19,7 @@ public class jsonTest {
 //        User json1 = JsonUtils.toObject("name:password",User.class);
 
 //        System.out.println(json);
-        Map<String, Object> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<String,Object>();
         map.put("alerf", "12");
         map.put("jock", "123");
         map.put("eriz", "1324");

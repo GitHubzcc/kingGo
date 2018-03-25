@@ -9,9 +9,9 @@ import javax.persistence.Table;
  * Created by eriz on 2018/3/16.
  */
 @Entity
-@Table(name = "zz_user")
-//@SequenceGenerator(name = "sequenceGenerator", sequenceName = "zz_user_sequence")
-public class User {
+@Table(name = "zz_order")
+//@SequenceGenerator(name = "sequenceGenerator", sequenceName = "zz_order_sequence")
+public class Order {
 
     @Id
     private Integer id;
@@ -25,11 +25,11 @@ public class User {
     }
 
     private String name;
-    
+
     private String passward;
 
 
-    public User(String name, String passward) {
+    public Order(String name, String passward) {
         this.name = name;
         this.passward = passward;
     }

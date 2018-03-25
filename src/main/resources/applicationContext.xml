@@ -6,20 +6,12 @@
 	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd"
        default-lazy-init="true">
 
-    <context:component-scan base-package="com.go.controller">
-        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-        <context:exclude-filter type="annotation"
-                                expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
-    </context:component-scan>
-
     <!-- jdbc.properteis 指定数据源路径 -->
     <context:property-placeholder location="classpath*:/conf/dev/system.properties" ignore-resource-not-found="true"
                                   ignore-unresolvable="true"/>
 
-    <context:component-scan base-package="com.go">
+    <context:component-scan base-package="com">
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-        <context:exclude-filter type="annotation"
-                                expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
     </context:component-scan>
 
     <!-- DataSource 配置数据源 -->
@@ -36,6 +28,54 @@
         <property name="checkoutTimeout" value="${connection_pools.checkout_timeout}"/>
     </bean>
 
+    <!--配置jpa start-->
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="persistenceXmlLocation" value="classpath*:/persistence.xml"/>
+        <!--<property name="packagesToScan" value="com"/>-->
+        <property name="persistenceUnitName" value="persistenceUnit"/>
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+                <property name="showSql" value="false"/>
+                <property name="generateDdl" value="true"/>
+            </bean>
+        </property>
+        <property name="jpaProperties">
+            <props>
+                <prop key="hibernate.dialect">${hibernate.dialect}</prop>
+                <prop key="hibernate.ejb.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</prop>
+                <prop key="hibernate.cache.use_second_level_cache">${hibernate.cache.use_second_level_cache}</prop>
+                <prop key="hibernate.cache.region.factory_class">${hibernate.cache.region.factory_class}</prop>
+                <prop key="hibernate.cache.use_query_cache">${hibernate.cache.use_query_cache}</prop>
+                <prop key="hibernate.jdbc.fetch_size">${hibernate.jdbc.fetch_size}</prop>
+                <prop key="hibernate.jdbc.batch_size">${hibernate.jdbc.batch_size}</prop>
+                <prop key="hibernate.connection.isolation">3</prop>
+                <prop key="javax.persistence.validation.mode">none</prop>
+                <prop key="hibernate.search.default.directory_provider">org.hibernate.search.store.FSDirectoryProvider
+                </prop>
+                <prop key="hibernate.search.default.indexBase">${java.io.tmpdir}/${system.project_name}/index</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
+
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <!-- 配置事务开始 -->
+    <!--<bean id="proxyDataSource"
+          class="org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy">
+        <constructor-arg>
+            <ref bean="dataSource"/>
+        </constructor-arg>
+    </bean>-->
+
+    <!-- 配置事务结束 -->
+
+
+    <!--配置jpa end-->
 
     <!-- ###########Spring与Hibernate整合  start########### -->
     <!-- 方式（1）直接加载hibernate.cfg.xml文件的方式整合
@@ -50,12 +90,12 @@
     </bean> -->
 
 
-    <!--所有的配置全部都在Spring配置文件中完成 -->
-    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
-        <!-- 注入连接池对象 -->
+    <!--方式 3 所有的配置全部都在Spring配置文件中完成 -->
+    <!--<bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+        &lt;!&ndash; 注入连接池对象 &ndash;&gt;
         <property name="dataSource" ref="dataSource"></property>
 
-        <!-- hibernate常用配置 -->
+        &lt;!&ndash; hibernate常用配置 &ndash;&gt;
         <property name="hibernateProperties">
             <props>
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
@@ -64,41 +104,15 @@
             </props>
         </property>
 
-        <!-- hibernate映射配置
-        <property name="mappingLocations">
-            <list>
-                <value>classpath:cn/itcast/entity/*.hbm.xml</value>
-            </list>
-        </property>
-        -->
-        <!--加载实体-->
+        &lt;!&ndash;加载实体&ndash;&gt;
         <property name="mappingDirectoryLocations">
                 <list>
                     <value>classpath:/com</value>
                 </list>
         </property>
-    </bean>
+    </bean>-->
 
     <!-- ###########Spring与Hibernate整合  end########### -->
-
-
-
-
-    <!-- 配置事务开始 -->
-    <bean id="proxyDataSource"
-          class="org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy">
-        <constructor-arg>
-            <ref bean="dataSource"/>
-        </constructor-arg>
-    </bean>
-
-    <bean id="transactionManager"
-          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="proxyDataSource"/>
-    </bean>
-
-    <tx:annotation-driven transaction-manager="transactionManager"/>
-    <!-- 配置事务结束 -->
 
 
     <!-- 发送邮件开始 -->
