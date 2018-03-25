@@ -22,11 +22,11 @@ public class UserDaoImpl implements UserDao {
     @PersistenceContext
     protected EntityManager entityManager;
 
-    public List getName() {
+    public List<User> getName() {
         String sql = "select user from User user ";
         try {
             log.info("开始查询");
-            entityManager.createQuery(sql, User.class).setFlushMode(FlushModeType.COMMIT).getResultList();
+            return entityManager.createQuery(sql, User.class).setFlushMode(FlushModeType.COMMIT).getResultList();
 //            return runner.query(sql, new BeanListHandler<User>(User.class));
         } catch (Exception e) {
             log.info("查询异常");

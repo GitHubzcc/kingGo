@@ -1,5 +1,7 @@
 package com.go.dao;
 
+import com.go.entity.User;
+
 import java.util.List;
 
 /**
@@ -7,5 +9,5 @@ import java.util.List;
  */
 public interface UserDao {
 
-    List getName();
+    List<User> getName();
 }

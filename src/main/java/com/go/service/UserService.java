@@ -1,5 +1,7 @@
 package com.go.service;
 
+import com.go.entity.User;
+
 import java.util.List;
 
 /**
@@ -7,5 +9,5 @@ import java.util.List;
  */
 public interface UserService {
 
-    List<String> getName();
+    List<User> getName();
 }

@@ -2,6 +2,7 @@ package com.go.service.impl;
 
 
 import com.go.dao.UserDao;
+import com.go.entity.User;
 import com.go.service.UserService;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,7 @@ public class UserServiceImpl implements UserService {
     @Resource(name = "userDaoImpl")
     private UserDao userDao;
 
-    public List<String> getName() {
+    public List<User> getName() {
         return userDao.getName();
     }
 }

@@ -1,5 +1,6 @@
 package com.go.controller;
 
+import com.go.entity.User;
 import com.go.service.UserService;
 import com.go.util.sysUtil.JsonMessage;
 import org.apache.log4j.Logger;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -23,6 +25,7 @@ public class UserController {
 
     @Resource(name = "userServiceImpl")
     private UserService userService;
+
     private Logger log = Logger.getLogger(getClass().getName());
 
 
@@ -36,17 +39,11 @@ public class UserController {
 
 
     @RequestMapping(value = "index", method = RequestMethod.GET)
-    public String test(HttpServletRequest request, HttpServletResponse response) {
-//        request.setAttribute("key", "key");
-
-        HttpSession session = request.getSession();
-        session.setAttribute("key1", "key1");
-        log.warn("测试logger日志打印结果.........");
-        log.debug("===========debug信息===============");
-        log.info("===========info信息===============");
-        log.error("===========error信息===============");
-//        userService.getName();
-        return "login";
+    @ResponseBody
+    public Object test() {
+        List<User> list = userService.getName();
+        System.out.println(list.size());
+        return JsonMessage.success(list);
     }
 
 

@@ -28,6 +28,8 @@ public class User {
     
     private String passward;
 
+    public User() {
+    }
 
     public User(String name, String passward) {
         this.name = name;
