@@ -10,4 +10,6 @@ import java.util.List;
 public interface UserService {
 
     List<User> getName();
+
+    int k = 0;
 }

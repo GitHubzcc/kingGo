@@ -18,12 +18,10 @@ public class SysFilter implements Filter {
 
     FilterConfig filterConfig;
 
-    @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         this.filterConfig = filterConfig;
     }
 
-    @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         log.info("start filter.");
         HttpServletRequest hrequest = (HttpServletRequest) request;
@@ -91,7 +89,6 @@ public class SysFilter implements Filter {
     };
 
 
-    @Override
     public void destroy() {
 
     }
